@@ -1,0 +1,59 @@
+import pandas as pd
+from extract import Extract
+
+extract = Extract()
+
+rank_type_sequences = [
+    ['ORGANIZATION', 'ORGANIZATION', 'PROCESS'],
+    ['ORGANIZATION', 'PROCESS', 'PERSON_ROLE'], 
+    ['PROCESS', 'PERSON_ROLE', 'PROCESS'],
+    ['PROCESS', 'ORGANIZATION', 'PROCESS'], 
+    ['ORGANIZATION', 'PROCESS', 'PROCESS'],
+    ['PROCESS', 'PROCESS', 'PERSON_ROLE'],
+    ['ORGANIZATION', 'ORGANIZATION', 'PERSON_ROLE'],
+    ['ORGANIZATION', 'ORGANIZATION', 'ORGANIZATION'],
+    ['ORGANIZATION', 'PROCESS', 'ORGANIZATION']
+    ['PROCESS', 'PERSON_ROLE', 'PERSON_ROLE'],
+    ['PROCESS', 'ORGANIZATION', 'ORGANIZATION'],
+    ['PROCESS', 'ORGANIZATION', 'PERSON_ROLE'], 
+    ['ORGANIZATION', 'PERSON_ROLE', 'PROCESS'],
+    ['PERSON_ROLE', 'PROCESS', 'PROCESS'],
+    ['PROCESS', 'PROCESS', 'ORGANIZATION'],
+    ['PERSON_ROLE', 'PROCESS', 'PERSON_ROLE'],
+    ['PROCESS', 'PROCESS', 'PROCESS'],
+    ['PROCESS', 'PERSON_ROLE', 'ORGANIZATION'],
+    ['PERSON_ROLE', 'PROCESS', 'ORGANIZATION'],
+    ['ORGANIZATION', 'PERSON_ROLE', 'PERSON_ROLE'],
+    ['ORGANIZATION', 'ORGANIZATION', 'GEO'],
+    ['PERSON_ROLE', 'ORGANIZATION', 'PERSON_ROLE'],
+    ['PERSON_ROLE', 'ORGANIZATION', 'PROCESS'],
+    ['GEO', 'ORGANIZATION', 'PROCESS'],
+    ['PROCESS', 'ORGANIZATION', 'GEO'],
+    ['PERSON_ROLE', 'PERSON_ROLE', 'PROCESS'],
+    ['GEO', 'ORGANIZATION', 'ORGANIZATION'],
+    ['ORGANIZATION', 'PERSON_ROLE', 'ORGANIZATION'],
+    ['PERSON_ROLE', 'PERSON_ROLE', 'ORGANIZATION'],
+    ['ORGANIZATION', 'GEO', 'ORGANIZATION'],
+    ['PERSON_ROLE', 'ORGANIZATION', 'GEO']
+]
+
+
+
+
+
+
+
+#list_types = ["PROCESS", "ORGANIZATION", "PERSON_ROLE"]
+#list_types = ['PROCESS', 'PROCESS', 'PROCESS']
+#a = extract.list_by_type_sequence(list_types)
+
+a = extract.rank_type_sequences(3, True)
+
+#a = extract.return_by_name("PROFESSORES")
+
+
+
+#a = extract.list_related_with_type("PROFESSORES", "PERSON_ROLE")
+
+print(a)
+print(len(a))

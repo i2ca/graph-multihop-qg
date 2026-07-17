@@ -1,0 +1,98 @@
+[
+  {
+    "id": "5ae17f1e5542990adbacf7a6",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Entre R\u00edos\n</answer>",
+    "answer": "Mesopotamia",
+    "normalized_completion": "entre r\u00edos",
+    "normalized_answer": "mesopotamia",
+    "correct": false,
+    "entities": ["Gualeguaychú"],
+    "properties": ["region"]
+  },
+  {
+    "id": "5a82112955429926c1cdae25",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Southaven\n</answer>",
+    "answer": "Southaven, Mississippi",
+    "normalized_completion": "southaven",
+    "normalized_answer": "southaven mississippi",
+    "correct": false,
+    "entities": ["WAVN"],
+    "properties": ["city"]
+  },
+  {
+    "id": "5a7f8b8c5542995d8a8ddea1",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Dice\n</answer>",
+    "answer": "a pair of dice",
+    "normalized_completion": "dice",
+    "normalized_answer": "a pair of dice",
+    "correct": false,
+    "entities": ["snake eyes"],
+    "properties": ["game pieces"]
+  },
+  {
+    "id": "5a734db15542994cef4bc523",
+    "level": "hard",
+    "type": "comparison",
+    "completion": "Constantine Orbelian\n</answer>",
+    "answer": "Lili Chookasian",
+    "normalized_completion": "constantine orbelian",
+    "normalized_answer": "lili chookasian",
+    "correct": false,
+    "entities": ["Constantine Orbelian", "Lili Chookasian"],
+    "properties": ["birth date"]
+  },
+  {
+    "id": "5ae679ec5542996d980e7b75",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Medellín\n</answer>",
+    "answer": "3.7 million",
+    "normalized_completion": "medellín",
+    "normalized_answer": "37 million",
+    "correct": false,
+    "entities": ["Carlos Vieco Ortiz"],
+    "properties": ["population of birth city"]
+  },
+  {
+    "id": "5a74f5155542993748c89750",
+    "level": "hard",
+    "type": "comparison",
+    "completion": "Kemess Mine\n</answer>",
+    "answer": "The Colomac Mine",
+    "normalized_completion": "kemess mine",
+    "normalized_answer": "the colomac mine",
+    "correct": false,
+    "entities": ["Kemess Mine", "Colomac Mine"],
+    "properties": ["operation start date by Royal Oak Mines"]
+  },
+  {
+    "id": "5ac55c135542993e66e82345",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Bergen\n</answer>",
+    "answer": "Hordaland",
+    "normalized_completion": "bergen",
+    "normalized_answer": "hordaland",
+    "correct": false,
+    "entities": ["Gorgoroth"],
+    "properties": ["county based in"]
+  },
+  {
+    "id": "5adfdef9554299025d62a36b",
+    "level": "hard",
+    "type": "bridge",
+    "completion": "Maine\n</answer>",
+    "answer": "Bath, Maine",
+    "normalized_completion": "maine",
+    "normalized_answer": "bath maine",
+    "correct": false,
+    "entities": ["William King"],
+    "properties": ["place of origin"]
+  }
+]

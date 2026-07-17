@@ -1,0 +1,523 @@
+{
+  "structures": [
+    {
+      "structure_id": "chain_2_person_place_date",
+      "name": "Two-hop linear chain",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "PERSON"},
+          {"role": "n1", "entity_type": "LOCATION"},
+          {"role": "n2", "entity_type": "DATE"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "died_in"},
+          {"source": "n1", "target": "n2", "relation_role": "discovered_in"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1"],
+      "answer_entity": "n2",
+      "examples": [
+        {
+          "entities": {"n0": "Napoleon Bonaparte", "n1": "Saint Helena", "n2": "1502"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Where did Napoleon Bonaparte die?", "answer": "Saint Helena"},
+            {"hop": 2, "question": "In what year was Saint Helena discovered?", "answer": "1502"}
+          ],
+          "multi_hop_question": "In what year was the island where Napoleon Bonaparte died discovered?",
+          "answer": "1502",
+          "contexts": [
+            {"text_unit_id": "example-001-a", "text": "Napoleon Bonaparte died in exile on Saint Helena in 1821."},
+            {"text_unit_id": "example-001-b", "text": "Portuguese navigators discovered Saint Helena in 1502."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "chain_3_person_city_landmark_architect",
+      "name": "Three-hop linear chain",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "PERSON"},
+          {"role": "n1", "entity_type": "LOCATION"},
+          {"role": "n2", "entity_type": "ARTIFACT"},
+          {"role": "n3", "entity_type": "PERSON"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "born_in"},
+          {"source": "n1", "target": "n2", "relation_role": "contains"},
+          {"source": "n2", "target": "n3", "relation_role": "designed_by"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1]},
+        {"hop": 3, "source": "n2", "target": "n3", "depends_on": [2]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "Ada Lovelace", "n1": "London", "n2": "Millennium Bridge", "n3": "Norman Foster"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "In which city was Ada Lovelace born?", "answer": "London"},
+            {"hop": 2, "question": "Which pedestrian bridge is located in London?", "answer": "Millennium Bridge"},
+            {"hop": 3, "question": "Who co-designed the Millennium Bridge?", "answer": "Norman Foster"}
+          ],
+          "multi_hop_question": "Who co-designed the pedestrian bridge located in the birth city of Ada Lovelace?",
+          "answer": "Norman Foster",
+          "contexts": [
+            {"text_unit_id": "example-002-a", "text": "Ada Lovelace was born in London in 1815."},
+            {"text_unit_id": "example-002-b", "text": "The Millennium Bridge is a pedestrian bridge in London."},
+            {"text_unit_id": "example-002-c", "text": "The Millennium Bridge was co-designed by architect Norman Foster."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "chain_4_landmark_city_company_product_material",
+      "name": "Four-hop linear chain",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "ARTIFACT"},
+          {"role": "n1", "entity_type": "LOCATION"},
+          {"role": "n2", "entity_type": "ORGANIZATION"},
+          {"role": "n3", "entity_type": "PRODUCT"},
+          {"role": "n4", "entity_type": "MATERIAL"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "located_in"},
+          {"source": "n2", "target": "n1", "relation_role": "founded_in"},
+          {"source": "n2", "target": "n3", "relation_role": "produces"},
+          {"source": "n3", "target": "n4", "relation_role": "made_from"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1], "traverses_edge_in_reverse": true},
+        {"hop": 3, "source": "n2", "target": "n3", "depends_on": [2]},
+        {"hop": 4, "source": "n3", "target": "n4", "depends_on": [3]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2", "n3"],
+      "answer_entity": "n4",
+      "examples": [
+        {
+          "entities": {"n0": "Grossmünster", "n1": "Zurich", "n2": "Lindt & Sprüngli", "n3": "Chocolate", "n4": "Cacao"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which city is home to the Grossmünster?", "answer": "Zurich"},
+            {"hop": 2, "question": "Which confectionery company was founded in Zurich?", "answer": "Lindt & Sprüngli"},
+            {"hop": 3, "question": "What food is Lindt & Sprüngli known for producing?", "answer": "Chocolate"},
+            {"hop": 4, "question": "What seed-derived material is used to make chocolate?", "answer": "Cacao"}
+          ],
+          "multi_hop_question": "What seed-derived material is used in the food produced by the confectionery company founded in the city home to the Grossmünster?",
+          "answer": "Cacao",
+          "contexts": [
+            {"text_unit_id": "example-003-a", "text": "The Grossmünster is a landmark church in Zurich."},
+            {"text_unit_id": "example-003-b", "text": "Lindt & Sprüngli began as a confectionery business in Zurich."},
+            {"text_unit_id": "example-003-c", "text": "Lindt & Sprüngli is internationally known for chocolate."},
+            {"text_unit_id": "example-003-d", "text": "Chocolate is produced from cacao seeds."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "converging_2_people_shared_work",
+      "name": "Two sources converging on a shared target",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "PERSON"},
+          {"role": "n1", "entity_type": "PERSON"},
+          {"role": "n2", "entity_type": "CREATIVE_WORK"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n2", "relation_role": "appeared_in"},
+          {"source": "n1", "target": "n2", "relation_role": "appeared_in"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n2", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [], "join_with": 1}
+      ],
+      "open_entities": ["n0", "n1"],
+      "hidden_entities": [],
+      "answer_entity": "n2",
+      "examples": [
+        {
+          "entities": {"n0": "Sean Connery", "n1": "Nicolas Cage", "n2": "The Rock"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which film featured Sean Connery?", "answer": "The Rock"},
+            {"hop": 2, "question": "Which film featured Nicolas Cage?", "answer": "The Rock"}
+          ],
+          "multi_hop_question": "Which film features both Sean Connery and Nicolas Cage?",
+          "answer": "The Rock",
+          "contexts": [
+            {"text_unit_id": "example-004-a", "text": "Sean Connery starred in the 1996 film The Rock."},
+            {"text_unit_id": "example-004-b", "text": "Nicolas Cage also starred in The Rock."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "diverging_2_attributes_comparison",
+      "name": "Shared source with attribute comparison",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "LOCATION"},
+          {"role": "n1", "entity_type": "ARTIFACT"},
+          {"role": "n2", "entity_type": "ARTIFACT"},
+          {"role": "n3", "entity_type": "NUMBER"},
+          {"role": "n4", "entity_type": "NUMBER"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "contains"},
+          {"source": "n0", "target": "n2", "relation_role": "contains"},
+          {"source": "n1", "target": "n3", "relation_role": "height"},
+          {"source": "n2", "target": "n4", "relation_role": "height"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n0", "target": "n2", "depends_on": []},
+        {"hop": 3, "source": "n1", "target": "n3", "depends_on": [1]},
+        {"hop": 4, "source": "n2", "target": "n4", "depends_on": [2]},
+        {"hop": 5, "operation": "argmax", "inputs": ["n3", "n4"], "returns": ["n1", "n2"], "depends_on": [3, 4]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n3", "n4"],
+      "answer_entity": "n1_or_n2",
+      "examples": [
+        {
+          "entities": {"n0": "Paris", "n1": "Eiffel Tower", "n2": "Montparnasse Tower", "n3": "330 metres", "n4": "210 metres"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which two towers are located in Paris?", "answer": "Eiffel Tower and Montparnasse Tower"},
+            {"hop": 3, "question": "How tall is the Eiffel Tower?", "answer": "330 metres"},
+            {"hop": 4, "question": "How tall is Montparnasse Tower?", "answer": "210 metres"}
+          ],
+          "multi_hop_question": "Which is taller, the Eiffel Tower or Montparnasse Tower in Paris?",
+          "answer": "Eiffel Tower",
+          "contexts": [
+            {"text_unit_id": "example-005-a", "text": "Paris contains both the Eiffel Tower and Montparnasse Tower."},
+            {"text_unit_id": "example-005-b", "text": "The Eiffel Tower is 330 metres tall."},
+            {"text_unit_id": "example-005-c", "text": "Montparnasse Tower has a height of 210 metres."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "diamond_two_routes_shared_answer",
+      "name": "Diamond with two supporting routes",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "PERSON"},
+          {"role": "n1", "entity_type": "CREATIVE_WORK"},
+          {"role": "n2", "entity_type": "AWARD"},
+          {"role": "n3", "entity_type": "DATE"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "created"},
+          {"source": "n0", "target": "n2", "relation_role": "received"},
+          {"source": "n1", "target": "n3", "relation_role": "released_in"},
+          {"source": "n2", "target": "n3", "relation_role": "awarded_in"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n0", "target": "n2", "depends_on": []},
+        {"hop": 3, "source": "n1", "target": "n3", "depends_on": [1]},
+        {"hop": 4, "source": "n2", "target": "n3", "depends_on": [2], "join_with": 3}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "Hayao Miyazaki", "n1": "Spirited Away", "n2": "Academy Award for Best Animated Feature", "n3": "2003"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which film did Hayao Miyazaki create that won an Academy Award?", "answer": "Spirited Away"},
+            {"hop": 2, "question": "Which Academy Award did Hayao Miyazaki receive for that film?", "answer": "Academy Award for Best Animated Feature"},
+            {"hop": 3, "question": "When was Spirited Away released in the United States?", "answer": "2003"},
+            {"hop": 4, "question": "When was the award presented?", "answer": "2003"}
+          ],
+          "multi_hop_question": "In which year was Hayao Miyazaki's award-winning film released in the United States and its Academy Award presented?",
+          "answer": "2003",
+          "contexts": [
+            {"text_unit_id": "example-006-a", "text": "Hayao Miyazaki created Spirited Away."},
+            {"text_unit_id": "example-006-b", "text": "Miyazaki received the Academy Award for Best Animated Feature for the film."},
+            {"text_unit_id": "example-006-c", "text": "Spirited Away received its United States release in 2003."},
+            {"text_unit_id": "example-006-d", "text": "The Academy Award was presented in 2003."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "chain_with_terminal_attribute",
+      "name": "Entity chain ending in an attribute",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "LOCATION"},
+          {"role": "n1", "entity_type": "SPECIES"},
+          {"role": "n2", "entity_type": "STATUS"}
+        ],
+        "edges": [
+          {"source": "n1", "target": "n0", "relation_role": "native_to"},
+          {"source": "n1", "target": "n2", "relation_role": "has_status"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": [], "traverses_edge_in_reverse": true},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1"],
+      "answer_entity": "n2",
+      "examples": [
+        {
+          "entities": {"n0": "Ancient lakes of Mexico City", "n1": "Axolotl", "n2": "Critically Endangered"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which neotenic species is native to the ancient lakes of Mexico City?", "answer": "Axolotl"},
+            {"hop": 2, "question": "What is the conservation status of the axolotl?", "answer": "Critically Endangered"}
+          ],
+          "multi_hop_question": "What is the conservation status of the neotenic species native to the ancient lakes of Mexico City?",
+          "answer": "Critically Endangered",
+          "contexts": [
+            {"text_unit_id": "example-007-a", "text": "The axolotl is a neotenic species native to lakes underlying Mexico City."},
+            {"text_unit_id": "example-007-b", "text": "The axolotl is classified as Critically Endangered."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "temporal_chain_event_successor",
+      "name": "Temporal event chain",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "EVENT"},
+          {"role": "n1", "entity_type": "DATE"},
+          {"role": "n2", "entity_type": "EVENT"},
+          {"role": "n3", "entity_type": "PERSON"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "ended_on"},
+          {"source": "n2", "target": "n1", "relation_role": "began_after"},
+          {"source": "n3", "target": "n2", "relation_role": "led"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1], "traverses_edge_in_reverse": true},
+        {"hop": 3, "source": "n2", "target": "n3", "depends_on": [2], "traverses_edge_in_reverse": true}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "World War II in Europe", "n1": "8 May 1945", "n2": "Postwar reconstruction program", "n3": "George Marshall"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "When did World War II end in Europe?", "answer": "8 May 1945"},
+            {"hop": 2, "question": "Which reconstruction program began after that date?", "answer": "Postwar reconstruction program"},
+            {"hop": 3, "question": "Who led the proposal for that program?", "answer": "George Marshall"}
+          ],
+          "multi_hop_question": "Who led the proposal for the reconstruction program begun after World War II ended in Europe?",
+          "answer": "George Marshall",
+          "contexts": [
+            {"text_unit_id": "example-008-a", "text": "World War II ended in Europe on 8 May 1945."},
+            {"text_unit_id": "example-008-b", "text": "A major postwar reconstruction program was developed after the war."},
+            {"text_unit_id": "example-008-c", "text": "George Marshall led the proposal for the reconstruction program."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "organization_program_eligibility",
+      "name": "Organization through program to eligibility rule",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "ORGANIZATION"},
+          {"role": "n1", "entity_type": "PROGRAM"},
+          {"role": "n2", "entity_type": "PERSON_ROLE"},
+          {"role": "n3", "entity_type": "REQUIREMENT"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "administers"},
+          {"source": "n1", "target": "n2", "relation_role": "accepts"},
+          {"source": "n2", "target": "n3", "relation_role": "must_satisfy"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n1", "target": "n2", "depends_on": [1]},
+        {"hop": 3, "source": "n2", "target": "n3", "depends_on": [2]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "Ufes", "n1": "Pibic", "n2": "Advisor", "n3": "Doctoral degree"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which scholarship program does Ufes administer?", "answer": "Pibic"},
+            {"hop": 2, "question": "Which role supervises students in Pibic?", "answer": "Advisor"},
+            {"hop": 3, "question": "What minimum degree must that advisor hold?", "answer": "Doctoral degree"}
+          ],
+          "multi_hop_question": "What minimum degree must an advisor hold in the scholarship program administered by Ufes?",
+          "answer": "Doctoral degree",
+          "contexts": [
+            {"text_unit_id": "example-009-a", "text": "Ufes administers the Pibic scientific initiation scholarship program."},
+            {"text_unit_id": "example-009-b", "text": "Pibic students conduct research under an advisor."},
+            {"text_unit_id": "example-009-c", "text": "A Pibic advisor must hold at least a doctoral degree."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "shared_person_two_works_common_collaborator",
+      "name": "Two branches converging on a collaborator",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "PERSON"},
+          {"role": "n1", "entity_type": "CREATIVE_WORK"},
+          {"role": "n2", "entity_type": "CREATIVE_WORK"},
+          {"role": "n3", "entity_type": "PERSON"}
+        ],
+        "edges": [
+          {"source": "n0", "target": "n1", "relation_role": "appeared_in"},
+          {"source": "n0", "target": "n2", "relation_role": "appeared_in"},
+          {"source": "n3", "target": "n1", "relation_role": "worked_on"},
+          {"source": "n3", "target": "n2", "relation_role": "worked_on"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": []},
+        {"hop": 2, "source": "n0", "target": "n2", "depends_on": []},
+        {"hop": 3, "source": "n1", "target": "n3", "depends_on": [1], "traverses_edge_in_reverse": true},
+        {"hop": 4, "source": "n2", "target": "n3", "depends_on": [2], "traverses_edge_in_reverse": true, "join_with": 3}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n1", "n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "Tom Hanks", "n1": "Philadelphia", "n2": "Forrest Gump", "n3": "Glen Brunman"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which Tom Hanks film concerns a lawyer facing discrimination?", "answer": "Philadelphia"},
+            {"hop": 2, "question": "Which Tom Hanks film follows a man from Alabama through major historical events?", "answer": "Forrest Gump"},
+            {"hop": 3, "question": "Who worked as music executive on Philadelphia?", "answer": "Glen Brunman"},
+            {"hop": 4, "question": "Who worked as music executive on Forrest Gump?", "answer": "Glen Brunman"}
+          ],
+          "multi_hop_question": "Which music executive worked on both the Tom Hanks films Philadelphia and Forrest Gump?",
+          "answer": "Glen Brunman",
+          "contexts": [
+            {"text_unit_id": "example-010-a", "text": "Tom Hanks starred in Philadelphia and Forrest Gump."},
+            {"text_unit_id": "example-010-b", "text": "Glen Brunman served as a music executive on Philadelphia."},
+            {"text_unit_id": "example-010-c", "text": "Glen Brunman also worked on Forrest Gump."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "category_member_extreme_attribute",
+      "name": "Category membership with extremum",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "CATEGORY"},
+          {"role": "n1", "entity_type": "ENTITY"},
+          {"role": "n2", "entity_type": "ENTITY"},
+          {"role": "n3", "entity_type": "NUMBER"},
+          {"role": "n4", "entity_type": "NUMBER"}
+        ],
+        "edges": [
+          {"source": "n1", "target": "n0", "relation_role": "member_of"},
+          {"source": "n2", "target": "n0", "relation_role": "member_of"},
+          {"source": "n1", "target": "n3", "relation_role": "attribute_value"},
+          {"source": "n2", "target": "n4", "relation_role": "attribute_value"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "source": "n0", "target": "n1", "depends_on": [], "traverses_edge_in_reverse": true},
+        {"hop": 2, "source": "n0", "target": "n2", "depends_on": [], "traverses_edge_in_reverse": true},
+        {"hop": 3, "source": "n1", "target": "n3", "depends_on": [1]},
+        {"hop": 4, "source": "n2", "target": "n4", "depends_on": [2]},
+        {"hop": 5, "operation": "argmin", "inputs": ["n3", "n4"], "returns": ["n1", "n2"], "depends_on": [3, 4]}
+      ],
+      "open_entities": ["n0"],
+      "hidden_entities": ["n3", "n4"],
+      "answer_entity": "n1_or_n2",
+      "examples": [
+        {
+          "entities": {"n0": "Inner planets", "n1": "Mercury", "n2": "Venus", "n3": "88 days", "n4": "225 days"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which planets belong to the inner planets?", "answer": "Mercury and Venus"},
+            {"hop": 3, "question": "What is Mercury's orbital period?", "answer": "88 days"},
+            {"hop": 4, "question": "What is Venus's orbital period?", "answer": "225 days"}
+          ],
+          "multi_hop_question": "Which of Mercury and Venus has the shorter orbital period?",
+          "answer": "Mercury",
+          "contexts": [
+            {"text_unit_id": "example-011-a", "text": "Mercury and Venus are inner planets."},
+            {"text_unit_id": "example-011-b", "text": "Mercury completes an orbit in about 88 days."},
+            {"text_unit_id": "example-011-c", "text": "Venus completes an orbit in about 225 days."}
+          ]
+        }
+      ]
+    },
+    {
+      "structure_id": "intersection_location_period_creator",
+      "name": "Intersection of location and time constraints",
+      "topology": {
+        "directed": true,
+        "nodes": [
+          {"role": "n0", "entity_type": "LOCATION"},
+          {"role": "n1", "entity_type": "DATE_RANGE"},
+          {"role": "n2", "entity_type": "ARTIFACT"},
+          {"role": "n3", "entity_type": "PERSON"}
+        ],
+        "edges": [
+          {"source": "n2", "target": "n0", "relation_role": "located_in"},
+          {"source": "n2", "target": "n1", "relation_role": "created_during"},
+          {"source": "n2", "target": "n3", "relation_role": "created_by"}
+        ]
+      },
+      "hop_order": [
+        {"hop": 1, "inputs": ["n0", "n1"], "target": "n2", "operation": "intersection", "depends_on": []},
+        {"hop": 2, "source": "n2", "target": "n3", "depends_on": [1]}
+      ],
+      "open_entities": ["n0", "n1"],
+      "hidden_entities": ["n2"],
+      "answer_entity": "n3",
+      "examples": [
+        {
+          "entities": {"n0": "Florence", "n1": "1501–1504", "n2": "David", "n3": "Michelangelo"},
+          "single_hop_questions": [
+            {"hop": 1, "question": "Which statue associated with Florence was created between 1501 and 1504?", "answer": "David"},
+            {"hop": 2, "question": "Who created David?", "answer": "Michelangelo"}
+          ],
+          "multi_hop_question": "Who created the statue associated with Florence that was made between 1501 and 1504?",
+          "answer": "Michelangelo",
+          "contexts": [
+            {"text_unit_id": "example-012-a", "text": "David is a Renaissance statue associated with Florence."},
+            {"text_unit_id": "example-012-b", "text": "The statue was created between 1501 and 1504."},
+            {"text_unit_id": "example-012-c", "text": "Michelangelo sculpted David."}
+          ]
+        }
+      ]
+    }
+  ]
+}
